@@ -53,7 +53,7 @@ Quick fix for when the interface becomes unresponsive, leaving interaction eleme
     };
     // Run immediately
     patchUI();
-    alert("UI Unlocked! Textarea = Green border, Buttons = Red border.");
+    console.log("UI Unlocked! Textarea = Green border, Buttons = Red border.");
 })();
 ``` 
 ---
