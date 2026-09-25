@@ -18,14 +18,15 @@ Quick fix for when the interface becomes unresponsive, leaving interaction eleme
     'use strict';
     const patchUI = () => {
         console.log("🔓 Attempting to unlock LMArena UI...");
-        // 1. Unlock Textarea
-        const textarea = document.querySelector('textarea');
-        if (textarea) {
+        // 1. Unlock all textareas
+        const textareas = document.querySelectorAll('textarea');
+        textareas.forEach(textarea => {
             textarea.removeAttribute('disabled');
+            textarea.removeAttribute('readonly');
             textarea.placeholder = "Force Unlocked - Type your message...";
             textarea.style.border = "2px solid #22c55e"; // Subtle green
             textarea.style.backgroundColor = "rgba(34, 197, 94, 0.05)";
-        }
+        });
         // 2. Unlock all buttons and interaction elements
         // Target: disabled attributes and common "lock" classes
         const selectors = [
@@ -61,7 +62,7 @@ Quick fix for when the interface becomes unresponsive, leaving interaction eleme
 Create a bookmark in your browser and paste this as the URL:
 
 ```javascript Bookmarklet
-javascript:(function(){const p=()=>{const t=document.querySelector('textarea');if(t){t.removeAttribute('disabled');t.placeholder="Force Unlocked...";t.style.border="2px solid #22c55e"}const s=['button[disabled]','button:disabled','.pointer-events-none','.opacity-50','[aria-disabled="true"]'];document.querySelectorAll(s.join(',')).forEach(e=>{e.removeAttribute('disabled');e.setAttribute('aria-disabled','false');e.classList.remove('pointer-events-none','cursor-not-allowed','opacity-50');e.style.pointerEvents="auto";e.style.cursor="pointer";e.style.opacity="1";e.style.border="2px solid #ef4444"});};p();alert("UI Unlocked!");})();
+javascript:(function(){const p=()=>{document.querySelectorAll('textarea').forEach(t=>{t.removeAttribute('disabled');t.removeAttribute('readonly');t.placeholder="Force Unlocked...";t.style.border="2px solid #22c55e"});const s=['button[disabled]','button:disabled','.pointer-events-none','.opacity-50','[aria-disabled="true"]'];document.querySelectorAll(s.join(',')).forEach(e=>{e.removeAttribute('disabled');e.setAttribute('aria-disabled','false');e.classList.remove('pointer-events-none','cursor-not-allowed','opacity-50');e.style.pointerEvents="auto";e.style.cursor="pointer";e.style.opacity="1";e.style.border="2px solid #ef4444"});};p();alert("UI Unlocked!");})();
 ```
 ---
 

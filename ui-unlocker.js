@@ -2,14 +2,15 @@
     'use strict';
     const patchUI = () => {
         console.log("🔓 Attempting to unlock LMArena UI...");
-        // 1. Unlock Textarea
-        const textarea = document.querySelector('textarea');
-        if (textarea) {
+        // 1. Unlock all textareas
+        const textareas = document.querySelectorAll('textarea');
+        textareas.forEach(textarea => {
             textarea.removeAttribute('disabled');
+            textarea.removeAttribute('readonly');
             textarea.placeholder = "Force Unlocked - Type your message...";
             textarea.style.border = "2px solid #22c55e"; // Subtle green
             textarea.style.backgroundColor = "rgba(34, 197, 94, 0.05)";
-        }
+        });
         // 2. Unlock all buttons and interaction elements
         // Target: disabled attributes and common "lock" classes
         const selectors = [
